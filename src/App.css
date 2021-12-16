@@ -1,38 +1,193 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* //select all function
+handleSelectAll(){
+  this.setState({isChecked:!this.state.isChecked})
+  let arr = this.state.checkArr;
+  let oldList = [...this.state.item]
+  if(!this.state.isChecked) {
+ oldList.map((elem)=>{
+      arr.push(elem);
+    }
+  )
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  else{
+    oldList.map((elem)=>{
+      arr.pop(elem);
+    })
+console.log('not checked')
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
+  this.setState({checkArr:arr})
+  this.setState({isChecked:!this.state.isChecked})
+  
+} */
+
+/* <div className="col-sm-5" id='delallbtn'>
+                <button className="btn btn-danger px-4" onClick={()=>this.handleDeleteAll()}>Delete Selected</button>
+              </div> */
+
+/* <div className ='row mt-4'>
+               <div className="col-3" id='selectAll'>
+                <lable>Select All </lable> 
+                <input type="checkbox" ></input>
+              </div>
+              </div> */
+
+
+
+              /* // select checkBox function
+// handleCheck(i){
+//   let arr = this.state.checkArr;
+//   let oldList = [...this.state.item]
+//  oldList.map((elem,id)=>{
+//     if (id===i) {
+
+//       arr.push(id);
+//     }
+//   })
+//   this.setState({checkArr:arr})
+//   this.setState({isDisabled:false})
+// } */
+
+
+
+
+              /* import "./App.css";
+              import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+              import React,{Component} from "react";
+              import Swal from 'sweetalert2'
+              // import Plan from "./Plan";
+              
+              class App extends Component {
+                constructor() {
+                  super();
+                  this.state = {
+                    item: [], act:0, index:'',
+                   checkArr:[], btntext: 'Add',
+                   btnColor: 'success', isDisabled:true
+                  };
+                }
+              
+              //add item
+                handleAdd() {
+                  let items = this.state.item;
+                  let value = this.refs.inputval.value;
+                  if (this.state.act === 0 && value !== '') {
+                    items.push(value);
+                    this.alertFun('Done!', 'User has been added Successfully')
+                  }
+                  else{
+                    let index = this.state.index;
+                    items[index] = value;
+                  }
+                  this.setState({item:items,act:0})
+                  this.handleBtn('rgb(21, 115, 71)','Add')
+                  this.refs.inputval.value = '';
+                }
+              
+              //delete item
+                handleDelete = (id) => {
+                  let items = this.state.item;
+                 items.splice(id,1)
+                this.setState({item:items})
+                  this.alertFun('Deleted!', 'User removed Successfully')
+                };
+              
+              //update function
+              handleUpdate(i){
+              let items = this.state.item[i];
+              this.refs.inputval.value = items;
+              this.setState({act:1,index:i});
+               this.handleBtn('rgb(255, 202, 44)','Update');
+              }
+              // select checkBox function
+              handleCheck(i){
+                let arr = this.state.checkArr;
+                let oldList = [...this.state.item]
+               oldList.map((elem,id)=>{
+                  if (id===i) {
+                    arr.push(id);
+                  }
+                })
+                this.setState({checkArr:arr})
+                this.setState({isDisabled:false})
+              }
+              
+              //Delete All function
+              handleDeleteAll(){
+                let checkedArr = this.state.checkArr;
+                let items = this.state.item;
+                 items = items.filter((elem,i) => !checkedArr.includes(i))
+                 checkedArr.splice(0)
+                this.setState({item:items});
+              }
+              
+               //alert function
+               alertFun(title,body){
+                Swal.fire(
+                  title,
+                  body,
+                  'success'
+                )
+              }
+              //handleBtn
+              handleBtn(bgcolor,txt){
+                let addbtn = document.getElementById('addbtn');
+                addbtn.style.backgroundColor= bgcolor
+                this.setState({btntext:txt})
+              }
+              
+              
+                render() {
+                  return (
+                     <div className="container-fluid my-5">
+                      <div className="row">
+                        <div className="col-sm-6 mx-auto shadow-lg py-3">
+                          <h2 className="text-center">Todo-App</h2>
+                     
+                          <div className="row justify-content-center mt-3">
+                            <div className="col-8 ml-5">
+                              <input
+                              id="input"
+                                type="text"
+                                placeholder="write your plan"
+                                className="form-control"
+                                ref="inputval"
+                              />
+                            </div>
+                            <div className="col-2">
+                              <button className="btn btn-success px-4" onClick={() => this.handleAdd()} id='addbtn'>{this.state.btntext}</button>
+                            </div>
+                            <div className="container-fluid">
+                              <ul className="list-unstyled row m-5 justify-content-center">
+                                {this.state.item.map((elem, i) => {
+                                  return (
+                                  <>
+                                    <li className="shadow p-2 my-2 col-md-7 col-sm-5 rounded"><input type='checkbox' className='inputBox multiSelect' onChange={()=>this.handleCheck(i)}/> <span>{i + 1}</span>&nbsp;&nbsp;{elem}</li>
+                                    <button type='button' className="btn btn-warning col-sm-1 " onClick={()=>this.handleUpdate(i)} id='updbtn'>U</button>
+                                    <button type='button' className="btn btn-danger col-sm-1 " onClick={()=>this.handleDelete(i)} id='delbtn'>X</button>
+                                  </> 
+                                );
+              
+                                })}
+                              </ul>
+                            </div>
+                            <div className='row'>
+                            <div className="col-sm-5" id='delallbtn'>
+                              <button className="btn btn-danger px-4" disabled={this.state.isDisabled} onClick={()=>this.handleDeleteAll()}>Delete Selected</button>
+                            </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+              }
+              
+              export default App; */
+              
+/* // let checkedArr = this.state.checkArr;
+  // let items = this.state.item;
+  //  items = items.filter((elem,i) => !checkedArr.includes(i))
+  //  checkedArr.splice(0)
+  // this.setState({item:items}); */

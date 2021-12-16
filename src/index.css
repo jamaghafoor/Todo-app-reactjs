@@ -1,13 +1,53 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+span{
+    color: rgb(111, 187, 187);
+    background-color: black;
+    padding: 1px 7px;
+    border-radius: 70%;
+}
+li{
+    color: rgb(10, 42, 61);
+    font-weight: 600;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#delbtn{
+    font-weight: 900;
+    font-size: 18px;
+    margin: 8px 1px;
+    color: rgb(238, 4, 4);
+    text-align: center;
+    background-color: white;
+    border: none;
+}
+
+#updbtn{
+    background-color: white;
+    border: none;
+    font-weight: 900;
+    font-size: 18px;
+    margin: 8px 1px 8px 30px;
+    color: rgb(255, 202, 44);
+}
+
+.multiSelect{
+    margin-left: -30px;
+    margin-right: 10px;
+    z-index: 99;
+}
+#addbtn{
+    border: none;
+    font-weight: 600;
+}
+
+#selectAll{
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+#delallbtn button{
+    font-size: 14px; 
+    padding: 5px 0px;
 }
